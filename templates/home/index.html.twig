@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+{% block head %}
+    {% block stylesheets %}
+        <link href="{{ asset('CSS/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('CSS/home.css') }}" rel="stylesheet">
+    {% endblock %}
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Bienvenue {{ user.getNom() }}</h1>
+
+    <section>
+        <div id="contacts-title">
+            {% if(user_contact.getIdNom() == user.getIdNom()) %}
+                <h3> Voici vos amis : </h3>
+            {% else %}
+                <h3> Voici les amis de {{ user_contact.getNom() }} : </h3>
+                <a href="/home"> Revenir à vos amis </a>
+            {% endif %}
+        </div>
+        <div id="contacts">
+            {% if contacts|length > 0 %}
+                {% for contact in contacts %}
+                    <a href="{{ "/home/friends/" ~ contact.getIdNom()|trans }}">
+                        <div class="contact">
+                            <h5 class="contact-name">
+                                {{ contact.getNom() }}
+                            </h5>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <h3>Vous n'avez pas encore d'amis</h3>
+            {% endif %}
+        </div>
+    </section>
+</div>
+<script src="{{ asset('js/home.js') }}"></script>
+{% endblock %}
+

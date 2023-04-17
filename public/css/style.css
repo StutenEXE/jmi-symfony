@@ -1,0 +1,63 @@
+:root {
+    --background-color: #16161a;
+    --title-color: #fffffe;
+    --text-color: #94a1b2;
+    --secondary-color: #7f5af0;
+    --tertiary-color: #2cb67d;
+    --error: #ff0000;
+}
+
+html, body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    position: relative;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: 'league-spartan', sans-serif;
+}
+
+body {
+
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Scrollbar bg */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background: var(--tertiary-color);
+    border-radius: 40px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    transition: 300ms;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border: 0;
+}
+
+a {
+    color: inherit;
+    /* blue colors for links too */
+    text-decoration: inherit;
+    /* no underline */
+}
+
+a:visited {
+    color: inherit;
+}
+
+.container {
+    position: relative;
+    margin: 3vh 3vw;
+}

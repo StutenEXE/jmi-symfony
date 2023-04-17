@@ -1,0 +1,121 @@
+html,body{
+    height: 100%;
+}
+body {
+    background: var(--background-color);
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-connect {
+    padding: 30px 25px 10px 25px;
+    width: 35%;
+    background-color: rgb(43, 40, 66);
+    border-radius: 20px;
+    z-index: 1;
+}
+.form-container{
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+h1.form-title {
+    padding-bottom: 8px;
+    text-align: center;
+    color: var(--MainTextColor);
+    font-size: 1.2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-div{
+    position: relative;
+}
+.form-input {
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 4px;
+    padding-left: 4px;
+    box-sizing: border-box;
+    transition: .3s;
+    z-index: 3;
+    color: white;
+    background: transparent;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.form_label{
+    color:white;
+    top:30%;
+    left:5px;
+    opacity: 70%;
+    transition: all 0.5s ease-in-out;
+    position:absolute;
+    z-index: 2;
+}
+.form-input:focus{
+    border-color:#3B78FE;
+    box-shadow:0 0 8px 0 #3B78FE;
+}
+
+.form-submit{
+    width: 100%;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 56px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 7px;
+    background-color: #3B78FE;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+    transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+}
+
+
+.form-div:focus-within label,
+.form-div input:valid + label,
+input:not([value=""]) ~ label
+{
+    color:#3B78FE;
+    transform: translate(0,-145%);
+}
+
+.error-msg{
+    color:rgb(255, 0, 0);
+    font-size: 0.9em;
+    position: absolute;
+}
+
+.error_input{
+    border-color: rgb(255, 0, 0);
+    color:rgb(255, 0, 0);
+}
+
+.global-error{
+    color:rgb(255, 255, 255);
+    position: absolute;
+    z-index: 9999;
+    background-color: rgb(236, 98, 98);
+    height: 30%;
+    width: 70%;
+    opacity: 80%;
+    top:15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul{
+    list-style: none;
+}

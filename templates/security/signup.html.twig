@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block head %}
+    {% block stylesheets %}
+        <link href="{{ asset('CSS/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('CSS/formulaire.css') }}" rel="stylesheet">
+    {% endblock %}
+{% endblock %}
+{% block body %}
+    <div id="connectForm" class="form-connect">
+        {{ form_start(form) }}
+        <h1 class="form-title">Register</h1>
+        <div id="connectForm" class="form-container">
+            <div class="form_lastname form-div">
+                {{ form_widget(form.prenom) }}
+                <div class="error-msg"> {{ form.prenom.vars.errors.form.getErrors(true) }}</div>
+                {{ form_label(form.prenom) }}
+            </div>
+
+            <div class="form-div">
+                {{ form_widget(form.nom) }}
+                <div class="error-msg"> {{ form.nom.vars.errors.form.getErrors(true) }}</div>
+                {{ form_label(form.nom) }}
+            </div>
+
+            <div class="form-div">
+                {{ form_widget(form.email) }}
+                <div class="error-msg"> {{ form.email.vars.errors.form.getErrors(true) }}</div>
+                {{ form_label(form.email) }}
+            </div>
+
+            <div class="form-div">
+                {{ form_widget(form.num) }}
+                <div class="error-msg"> {{ form.num.vars.errors.form.getErrors(true) }}</div>
+                {{ form_label(form.num) }}
+            </div>
+        </div>
+        <a class='inscription' href='/login'>Déjà inscrit? connectez-vous</a>
+        <button class="form-submit">Connexion</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

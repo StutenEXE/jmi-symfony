@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block head %}
+    {% block stylesheets %}
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/formulaire.css') }}" rel="stylesheet">
+    {% endblock %}
+{% endblock %}
+{% block body %}
+    <div id="connectForm" class="form-connect">
+        {{ form_start(form) }}
+        <h1 class="form-title">Login</h1>
+        <div id="connectForm" class="form-container">
+            <div class="form-div">
+                {{ form_widget(form.nom) }}
+                <div class="error-msg"> {{ form.nom.vars.errors.form.getErrors(true) }}</div>
+                {{ form_label(form.nom) }}
+            </div>
+            <div class="form-div">
+                {{ form_widget(form.num) }}
+                <div class="error-msg"> {{ form.num.vars.errors.form.getErrors(true) }}</div>
+                {{ form_label(form.num) }}
+            </div>
+        </div>
+        <a class='inscription' href='/signup'>Pas encore de compte ? Inscrivez-vous ici !</a>
+        <button class="form-submit">Connexion</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
+
