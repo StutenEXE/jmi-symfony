@@ -90,7 +90,15 @@ class SecurityController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    #[Route('/logout', name: 'logout')]
+    public function logout(Request $request){
+        $session = $request->getSession();
 
+        if (!$session->get('user', null) == null) {
+            $session->remove('user');
+        }
+        return $this->redirectToRoute('app_home');
+    }
 //    private function mapFormToUtilisateur($formData): Utilisateur {
 //        $user = new Utilisateur($formData['nom'], $formData['prenom'], $formData['num'], $formData['email']);
 //        return $user;
