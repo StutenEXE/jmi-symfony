@@ -38,7 +38,15 @@ class ContactRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    public function deleteContactByID(int $UserID){
+        $qb = $this->createQueryBuilder('c')
+            ->delete()
+            ->where('c.id_nom = :id OR c.id_contact = :id')
+            ->setParameter('id',$UserID)
+        ;
+        $query = $qb->getQuery();
+        $query->getResult();
+    }
 //    /**
 //     * @return Contact[] Returns an array of Contact objects
 //     */

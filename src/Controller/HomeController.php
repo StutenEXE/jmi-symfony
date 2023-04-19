@@ -32,7 +32,15 @@ class HomeController extends AbstractController
             'contacts' => $contacts
         ]);
     }
+    #[Route('/', name: 'root')]
+    public function root(Request $request): Response {
+        $session = $request->getSession();
 
+        if ($session->get('user', null) == null) {
+            return $this->redirectToRoute('app_login');
+        }
+        return $this->redirectToRoute('app_home');
+    }
     #[Route('/home/friends/{id}', name: 'app_home_friends')]
     public function homeOther(EntityManagerInterface $entityManager, Request $request, string $id): Response{
         $session = $request->getSession();

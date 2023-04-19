@@ -1,4 +1,7 @@
 /*** PAGE D'ACCUEIL ***/
+body{
+    display: block;
+}
 #contacts {
     display: flex;
     flex-direction: row;
@@ -14,6 +17,25 @@
     gap: 5vw;
 }
 
+.action-menu{
+    display: flex;
+}
+.action-button{
+    margin-right: 17px;
+    padding: 0px 5px 0px 5px;
+    height: 30px;
+    background-color: var(--tertiary-color);
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .contact {
     position: relative;
     font-weight: bold;

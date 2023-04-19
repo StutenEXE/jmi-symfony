@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Form\LoginType;
 use App\Form\SignupType;
+use App\Repository\UtilisateurRepository;
+use PHPUnit\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
+use function mysql_xdevapi\getSession;
+use Psr\Log\LoggerInterface;
 class SecurityController extends AbstractController
 {
 
@@ -30,18 +34,18 @@ class SecurityController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $data = $form->getData();
 
             $UtilisateurRepository = $entityManager->getRepository(Utilisateur::class);
             $utilisateur = $UtilisateurRepository->findOneBy(array(
-                'nom' => $utilisateur->getNom(),
-                'num' => $utilisateur->getNum())
+                    'nom' => $utilisateur->getNom(),
+                    'num' => $utilisateur->getNum())
             );
 
             if ($utilisateur != null) {
                 $session->set('user', $utilisateur);
- 
+
                 return new RedirectResponse('home');
             }
 
@@ -68,7 +72,7 @@ class SecurityController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $data = $form->getData();
 
             $UtilisateurRepository = $entityManager->getRepository(Utilisateur::class);
@@ -90,7 +94,36 @@ class SecurityController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    #[Route('/logout', name: 'logout')]
+    public function logout(Request $request):Response{
+        $session = $request->getSession();
 
+        if (!$session->get('user', null) == null) {
+            $session->remove('user');
+        }
+        return $this->redirectToRoute('app_home');
+    }
+    #[Route('/deleteAccount', name: 'deleteAccount')]
+    public function deleteAccount(EntityManagerInterface $entityManager,Request $request):Response{
+        $contactRepository = $entityManager->getRepository(Contact::class);
+        $user = $request->getSession()->get('user');
+
+        try{
+            $id = $user->getIdNom();
+            $entity = $entityManager->merge($user);
+            $entityManager->remove($entity);
+            $contactRepository->deleteContactByID($id);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_signup');
+        }
+        catch (Exception $e){
+            return $this->redirectToRoute('app_home');
+        }
+
+    }
+    private function deleteUser(EntityManagerInterface $entityManager, int $userID){
+
+    }
 //    private function mapFormToUtilisateur($formData): Utilisateur {
 //        $user = new Utilisateur($formData['nom'], $formData['prenom'], $formData['num'], $formData['email']);
 //        return $user;
