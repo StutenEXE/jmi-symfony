@@ -1,4 +1,7 @@
 /*** PAGE D'ACCUEIL ***/
+body{
+    display: block;
+}
 #contacts {
     display: flex;
     flex-direction: row;
@@ -13,7 +16,11 @@
     align-items: center;
     gap: 5vw;
 }
-.disconnect{
+
+.action-menu{
+    display: flex;
+}
+.action-button{
     margin-right: 17px;
     padding: 0px 5px 0px 5px;
     height: 30px;

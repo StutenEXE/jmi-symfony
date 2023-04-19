@@ -3,15 +3,21 @@
 {% block title %}Home{% endblock %}
 {% block head %}
     {% block stylesheets %}
+        <link href="{{ asset('css/formulaire.css') }}" rel="stylesheet">
         <link href="{{ asset('CSS/style.css') }}" rel="stylesheet">
         <link href="{{ asset('CSS/home.css') }}" rel="stylesheet">
+
     {% endblock %}
 {% endblock %}
 {% block body %}
 <div class="container">
     <div class = 'header'>
         <h1>Bienvenue {{ user.getNom() }}</h1>
-        <a href='/logout' class="disconnect">Se deconnecter</a>
+        <div class ='action-menu'>
+            <a class = "action-button delete-account">Supprimer mon compte</a>
+            <a href='/logout' class="action-button">Se deconnecter</a>
+        </div>
+
     </div>
 
     <section>
@@ -40,6 +46,7 @@
         </div>
     </section>
 </div>
-<script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/deleteAccount.js') }}"></script>
 {% endblock %}
 
