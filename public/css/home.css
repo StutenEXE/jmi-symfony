@@ -16,6 +16,7 @@ body{
     align-items: center;
     gap: 5vw;
 }
+
 .action-menu{
     display: flex;
 }
