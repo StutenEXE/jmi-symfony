@@ -10,6 +10,7 @@
 {% block body %}
     <div id="connectForm" class="form-connect">
         {{ form_start(form) }}
+        <input type="hidden" name="_token" value="{{ csrf_token_value }}" />
         <h1 class="form-title">Login</h1>
         <div id="connectForm" class="form-container">
             <div class="form-div">

@@ -35,6 +35,13 @@ class UtilisateurRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getUtilisateur(int $user_id): ?Utilisateur
+    {
+        $user = $this->findOneBy(array(
+                'id_nom' => $user_id)
+        );
+        return $user;
+    }
 //    /**
 //     * @return Utilisateur[] Returns an array of Utilisateur objects
 //     */
