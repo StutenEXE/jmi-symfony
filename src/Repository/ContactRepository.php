@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Contact;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -46,6 +48,22 @@ class ContactRepository extends ServiceEntityRepository
         ;
         $query = $qb->getQuery();
         $query->getResult();
+    }
+
+    public function getContacts(EntityManagerInterface $entityManager, int $user_id): array {
+        $UtilisateurRepository = $entityManager->getRepository(Utilisateur::class);
+        $contacts = $this->findBy(array(
+                'id_nom' => $user_id)
+        );
+        $contactsAsUser = array();
+        foreach($contacts as $contactId) {
+            array_push($contactsAsUser,
+                $UtilisateurRepository->findOneBy(array(
+                    'id_nom' => $contactId->getIdContact()))
+                );
+        }
+
+        return $contactsAsUser;
     }
 //    /**
 //     * @return Contact[] Returns an array of Contact objects

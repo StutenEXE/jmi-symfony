@@ -24,7 +24,8 @@ class HomeController extends AbstractController
 
         $user =  $session->get('user');
 
-        $contacts = $this->getContacts($entityManager, $user->getIdNom());
+        $ContactRepository = $entityManager->getRepository(Contact::class);
+        $contacts = $ContactRepository->getContacts($entityManager,$user->getIdNom());
 
         return $this->render('home/index.html.twig', [
             'user' => $user,
@@ -51,9 +52,11 @@ class HomeController extends AbstractController
 
         $user =  $session->get('user');
 
-        $contacts = $this->getContacts($entityManager, $id);
-        $user_contact = $this->getUtilisateur($entityManager, $id);
 
+        $ContactRepository = $entityManager->getRepository(Contact::class);
+        $UtilisateurRepository = $entityManager->getRepository(Utilisateur::class);
+        $contacts = $ContactRepository->getContacts($entityManager,$id);
+        $user_contact = $UtilisateurRepository->getUtilisateur($id);
         return $this->render('home/index.html.twig', [
             'user' => $user,
             'user_contact' => $user_contact,
@@ -61,31 +64,4 @@ class HomeController extends AbstractController
         ]);
     }
 
-
-    private function getContacts(EntityManagerInterface $entityManager, int $user_id): array {
-        $ContactRepository = $entityManager->getRepository(Contact::class);
-        $UtilisateurRepository = $entityManager->getRepository(Utilisateur::class);
-        $contacts = $ContactRepository->findBy(array(
-                'id_nom' => $user_id)
-        );
-
-        $contactsAsUser = array();
-        foreach($contacts as $contactId) {
-            array_push($contactsAsUser,
-                $UtilisateurRepository->findOneBy(array(
-                    'id_nom' => $contactId->getIdContact()))
-                );
-        }
-
-        return $contactsAsUser;
-    }
-
-    private function getUtilisateur(EntityManagerInterface $entityManager, int $user_id) {
-        $UtilisateurRepository = $entityManager->getRepository(Utilisateur::class);
-        $user = $UtilisateurRepository->findOneBy(array(
-                'id_nom' => $user_id)
-        );
-
-        return $user;
-    }
 }
